@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="topnav">
+            <a class="active" href="#home">Home</a>
+            <a href="/upload">Upload file</a>
+        </div>
+
+        <div style="padding: 20px; font-size: 20px; text-align: center">List User Data</div>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>FirstName</th>
+                <th>Last Name</th>
+                <th>Action</th>
+            </tr>
+            <% for(let i=0 ; i < dataUser.length ; i++){%>
+            <tr>
+                <td><%=dataUser[i].id%></td>
+                <td><%=dataUser[i].firstName%></td>
+                <td><%=dataUser[i].lastName%></td>
+                <td>
+                    <a href="/detail/user/<%= dataUser[i].id%>"><button type="button">Detail</button></a>
+                    <form action="/edit-user/<%= dataUser[i].id%>" method="GET">
+                        <button type="submit">Edit</button>
+                    </form>
+                    <form action="/delete-user/<%= dataUser[i].id%>" method="POST">
+                        <button type="submit">Delete</button>
+                        <input type="text" value="<%= dataUser[i].id%>" hidden />
+                    </form>
+                </td>
+            </tr>
+            <%}%>
+        </table>
+
+        <div class="create-user-container">
+            <form action="/create-new-user" method="POST">
+                <div>
+                    <label>First Name</label>
+                    <input type="text" name="firstName" />
+                </div>
+                <div>
+                    <label>Last Name</label>
+                    <input type="text" name="lastName" />
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input type="email" name="email" />
+                </div>
+                <div>
+                    <label>Address</label>
+                    <input type="text" name="address" />
+                </div>
+                <div><button class="btn-submit" type="submit">submit</button></div>
+            </form>
+        </div>
+    </body>
+</html>
